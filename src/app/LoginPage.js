@@ -42,19 +42,15 @@ export default function Login() {
                 response.json().then(data => {
                     if (window !== undefined) {
                         window.localStorage.setItem('userId', data.id);
+                        window.localStorage.setItem('userName', data.nombre); // Guardar el nombre del usuario
                     }
-                    router.push('/pagina-principal');
+                    router.push('/projectList');
                 });
                 
             } else {
                 alert('Usuario o contraseña incorrecta');
             }
-        })
-        
-        
-
-        
-        
+        })  
     }
 
   return (

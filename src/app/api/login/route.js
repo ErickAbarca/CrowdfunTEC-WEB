@@ -30,11 +30,13 @@ export async function POST(req) {
             // Obtener el ID del primer documento encontrado
             const doc = querySnapshot.docs[0];
             const id = doc.id;
+            const name = doc.data().nombre;
 
             return new Response(
                 JSON.stringify({
                     message: 'Usuario encontrado',
-                    id: id
+                    id: id,
+                    nombre: name
                 }),
                 { status: 200 }
             );
