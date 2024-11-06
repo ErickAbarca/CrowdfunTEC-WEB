@@ -11,8 +11,7 @@ const FilterBar = ({ searchTerm, setSearchTerm, userName }) => {
   };
 
   const handleUserAdmin = () => {
-    // Lógica para administrar el usuario
-    console.log('Administrar usuario');
+    router.push('../editUser'); // Redirigir a la página de edición de usuario
   };
 
   return (
@@ -25,7 +24,7 @@ const FilterBar = ({ searchTerm, setSearchTerm, userName }) => {
         className={styles.searchInput}
       />
       <h2>Bienvenid@, {userName}</h2>
-      <button className={styles.button} onClick={() => router.push('../editUser')}>
+      <button className={styles.button} onClick={handleUserAdmin}>
         Administrar Usuario
       </button>
     </div>

@@ -28,7 +28,7 @@ export default function SignUp() {
 
 
 
-
+    const handleFondos = () => {router.push('/projectList');};
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -263,6 +263,9 @@ export default function SignUp() {
 
                 <button className={styles.button} type="submit">
                     Guardar Cambios
+                </button>
+                <button className={styles.button} type="button" onClick={handleFondos}>
+                    Añadir Fondos
                 </button>
             </form>
 

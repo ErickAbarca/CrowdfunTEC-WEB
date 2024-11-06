@@ -42,9 +42,13 @@ export default function Login() {
                 response.json().then(data => {
                     if (window !== undefined) {
                         window.localStorage.setItem('userId', data.id);
-                        window.localStorage.setItem('userName', data.nombre); // Guardar el nombre del usuario
+                        window.localStorage.setItem('userName', data.nombre);
+                        window.localStorage.setItem('userRole', data.rol);
                     }
-                    router.push('/projectList');
+                    if (data.rol === 'User' || data.rol === 'user') {
+                      router.push('/projectList');
+                    }
+                    
                 });
                 
             } else {

@@ -31,12 +31,14 @@ export async function POST(req) {
             const doc = querySnapshot.docs[0];
             const id = doc.id;
             const name = doc.data().nombre;
+            const rol = doc.data().rol;
 
             return new Response(
                 JSON.stringify({
                     message: 'Usuario encontrado',
                     id: id,
-                    nombre: name
+                    nombre: name,
+                    rol: rol
                 }),
                 { status: 200 }
             );

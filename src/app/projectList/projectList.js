@@ -6,8 +6,8 @@ import FilterBar from './filterbar'; // Importar el componente FilterBar
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
-    const [userName, setUserName] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [userName, setUserName] = useState('');
 
     const router = useRouter();
 
@@ -36,12 +36,17 @@ const ProjectList = () => {
         );
     });
 
+    const handleProjectClick = (project) => {
+        window.localStorage.setItem('projectId', project.id);
+        router.push('../projectDetails/');
+    };
+
     return (
         <div>
             <FilterBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} userName={userName} />
             <div className={styles.projectList}>
                 {filteredProjects.map((project) => (
-                    <div key={project.id} className={styles.projectCard}>
+                    <div key={project.id} className={styles.projectCard} onClick={() => handleProjectClick(project)}>
                         <h3>{project.nombre}</h3>
                         <p>{project.descripcion_corta}</p>
                         <p>Categoría: {project.categoria}</p>
