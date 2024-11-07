@@ -14,7 +14,7 @@
     "@mui/icons-material": "^6.1.5",
     "@mui/material": "^6.1.5",
     "firebase": "^11.0.1",
-    "next": "15.0.1",
+    "next": "^15.0.3-canary.5",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
   },
