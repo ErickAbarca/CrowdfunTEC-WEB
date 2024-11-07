@@ -28,7 +28,7 @@ export default function SignUp() {
 
 
 
-    const handleFondos = () => {router.push('/projectList');};
+    const handleFondos = () => {router.push('/addMoney');};
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
