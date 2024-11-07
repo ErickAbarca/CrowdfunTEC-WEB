@@ -17,10 +17,11 @@ export default function EditUser() {
     const [targetAmountVar, setTargetAmountVar] = useState('');
     const [deadline, setDeadline] = useState('');
     const [category, setCategory] = useState('');
+    const [totalDonated, setTotalDonated] = useState('');
 
 
     const handleCancel = () => {router.push('/projectList');};
-    const handleDonar = () => {router.push('/projectList');};
+    const handleDonar = () => {router.push('/projectDonate');};
 
 
     useEffect(() => {
@@ -47,12 +48,17 @@ export default function EditUser() {
           }).then(response => {
               if (response.ok) {
                   response.json().then(data => {
+                    let total = 0;
                       setProjectName(data.project.nombre);
                       setShortDescription(data.project.descripcion_corta);
                       setLongDescription(data.project.descripcion);
                       setTargetAmountVar(data.project.dinero_objetivo);
                       setCategory(data.project.categoria);
                       setDeadline(data.project.fecha_limite);
+                      for (let i = 0; i < data.project.donaciones.length; i++) {
+                        total += data.project.donaciones[i].monto;
+                      }
+                      setTotalDonated(total);
                   });
               } else {
                   alert('Error al obtener la información del proyecto');
@@ -69,10 +75,8 @@ export default function EditUser() {
     return (
         <div className={styles.container}>
           <h1 className={styles.title}>Detalles del Proyecto</h1>
+          <h2 className={styles.title}><i>{projectName}</i></h2>
           <div className={styles.form}>
-            
-            <TextField id="projectName" label="Nombre del Proyecto" variant="standard"
-              type="text" sx={{ m: 1, width: '85%' }} className={styles.inputField} InputLabelProps={{ shrink: true }} defaultValue={projectName} InputProps={{ readOnly: true }}/>
             
             <TextField id="shortDescription" label="Descripción Corta" variant="standard"
               type="text" sx={{ m: 1, width: '85%' }} className={styles.inputField} InputLabelProps={{ shrink: true }} defaultValue={shortDescription}InputProps={{ readOnly: true }}/>
@@ -83,6 +87,10 @@ export default function EditUser() {
             <TextField id="targetAmount" label="Dinero Objetivo" variant="standard"
               type="number" 
               sx={{ m: 1, width: '85%' }} className={styles.inputField} InputLabelProps={{ shrink: true }} defaultValue={targetAmountVar}InputProps={{ readOnly: true }}/>
+
+            <TextField id="totalDonated" label="Dinero Recaudado" variant="standard"
+              type="number" 
+              sx={{ m: 1, width: '85%' }} className={styles.inputField} InputLabelProps={{ shrink: true }} defaultValue={totalDonated}InputProps={{ readOnly: true }}/>
             
             <TextField id="deadline" label="Fecha Límite" variant="standard"
               type="date" 
@@ -90,8 +98,7 @@ export default function EditUser() {
             
             <TextField id="category" label="Categoría" variant="standard"
               type="text" sx={{ m: 1, width: '85%' }} className={styles.inputField} InputLabelProps={{ shrink: true }} defaultValue={category}InputProps={{ readOnly: true }}/>
-    
-            <div className={styles.buttonContainer}>
+
               <Button variant="outlined" color="secondary" onClick={handleCancel}>
                 Cancelar
               </Button>
@@ -99,7 +106,6 @@ export default function EditUser() {
                 Donar
               </Button>
             </div>
-          </div>
         </div>
       );
     }
