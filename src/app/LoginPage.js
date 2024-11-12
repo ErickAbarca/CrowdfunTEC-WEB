@@ -48,7 +48,11 @@ export default function Login() {
                     if (data.rol === 'User' || data.rol === 'user') {
                       router.push('/projectList');
                     }
-                    
+                    else if (data.rol === 'Admin' || data.rol === 'admin') {
+                      router.push('/admin');
+                    } else {
+                      alert('Usuario o contraseña incorrecta');
+                    }
                 });
                 
             } else {
