@@ -50,11 +50,6 @@ export default function Login() {
                 alert('Usuario o contraseña incorrecta');
             }
         })
-        
-        
-
-        
-        
     }
 
   return (
