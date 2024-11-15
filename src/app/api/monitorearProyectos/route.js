@@ -15,7 +15,7 @@ export async function GET() {
       return {
         id: doc.id,
         nombre: data.nombre || 'Sin nombre',
-        montoRecaudado: montoRecaudado.toFixed(2),
+        montoRecaudado, // Mantén esto como número
         imagenUrl,
       };
     });

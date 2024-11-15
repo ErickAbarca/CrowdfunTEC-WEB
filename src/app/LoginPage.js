@@ -62,7 +62,11 @@ export default function Login() {
                             const projectId = projectData?.project?.id;
                             if (projectId) {
                                 window.localStorage.setItem('projectId', projectId);
-                                router.push(`/projectDetailsAdmin?projectId=${projectId}`);
+                                
+                                // router.push(`/projectDetailsAdmin?projectId=${projectId}`);
+                                //router.push(`/monitorearProyectos`);
+                                router.push(`/subirMedia`);
+
                             } else {
                                 alert('No se encontró el proyecto asociado al administrador.');
                             }
