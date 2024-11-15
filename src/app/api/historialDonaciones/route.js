@@ -10,7 +10,8 @@ export async function GET() {
       const data = doc.data();
       return {
         id: doc.id,
-        donacionId: data.donacion_id || 'Desconocido',
+        donador: data.nombre_donante || 'Desconocido',
+        donadorId: data.id_donante || 'Desconocido',
         montoDonado: data.monto || 0.0,
         imagenUrl: data.imagenUrl || '',
       };

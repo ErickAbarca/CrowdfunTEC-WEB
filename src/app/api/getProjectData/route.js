@@ -1,37 +1,40 @@
 import db from '../db'; // importación de la base de datos
-import { getDoc, doc } from 'firebase/firestore'; // Métodos de Firestore necesarios
+import { getDocs, collection, query, where } from 'firebase/firestore'; // Métodos de Firestore necesarios
 
-// Creación del endpoint para validar usuario
+// Creación del endpoint para obtener datos del proyecto
 export async function POST(req) {
     try {
-        // Obtener email y password del body de la solicitud
-        const { id } = await req.json();
+        const { id } = await req.json();  // ID del usuario admin
 
-        // Referencia a la colección 'usuarios'
-        const projectRef = doc(db, 'proyectos', id);
+        // Realizar una consulta para buscar el proyecto donde usuario_id coincide con el ID del usuario admin
+        const proyectosRef = collection(db, 'proyectos');
+        const q = query(proyectosRef, where('usuario_id', '==', id));
+        const querySnapshot = await getDocs(q);
 
-        const docSnap = await getDoc(projectRef);
-
-        if (!docSnap.exists()) {
+        if (querySnapshot.empty) {
             return new Response(
-                JSON.stringify({ message: 'Usuario no encontrado' }),
+                JSON.stringify({ message: 'Proyecto no encontrado' }),
                 { status: 404 }
             );
         }
 
-        const projectData = docSnap.data();
-        console.log('Project encontrado:', projectData);
+        // Supongamos que cada usuario admin tiene un solo proyecto asignado
+        const projectDoc = querySnapshot.docs[0];
+        const projectData = projectDoc.data();
+        console.log('Proyecto encontrado:', { ...projectData, id: projectDoc.id });
 
         return new Response(
-            JSON.stringify({ message: 'Usuario encontrado', project: projectData }),
+            JSON.stringify({ 
+                message: 'Proyecto encontrado', 
+                project: { ...projectData, id: projectDoc.id }  // Incluye el id del documento
+            }),
             { status: 200 }
         );
 
-        
     } catch (error) {
         // Manejo de errores
         return new Response(
-            JSON.stringify({ message: 'Error al buscar el usuario', error: error.message }),
+            JSON.stringify({ message: 'Error al buscar el proyecto', error: error.message }),
             { status: 500 }
         );
     }

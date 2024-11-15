@@ -1,12 +1,22 @@
 'use client';
 import styles from './page.module.css';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button, Typography, Card, CardContent, CardMedia } from '@mui/material';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Button, Typography, Card, CardContent, CardMedia, Stack } from '@mui/material';
 
-export default function ProjectDetailsAdmin({ projectId }) {
+export default function ProjectDetailsAdmin() {
   const [project, setProject] = useState(null);
+  const [projectId, setProjectId] = useState(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    // Asegúrate de que `searchParams` esté listo antes de extraer `projectId`
+    if (searchParams) {
+      const id = searchParams.get('projectId');
+      if (id) setProjectId(id);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (projectId) {
@@ -18,7 +28,7 @@ export default function ProjectDetailsAdmin({ projectId }) {
   }, [projectId]);
 
   const handleToggleActive = () => {
-    fetch(`/api/projectDetailsAdmin/toggleActive`, {
+    fetch(`/api/projectDetailsAdmin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,40 +55,48 @@ export default function ProjectDetailsAdmin({ projectId }) {
         Detalles del Proyecto
       </Typography>
       <Card className={styles.card}>
-        {project.imagenes && project.imagenes.length > 0 && (
-          <CardMedia
-            component="img"
-            height="200"
-            image={project.imagenes[0]}
-            alt="Imagen del Proyecto"
-          />
-        )}
+        <CardMedia
+          component="img"
+          height="200"
+          image={project.imagenes && project.imagenes.length > 0 ? project.imagenes[0] : '/placeholder.jpg'}
+          alt="Imagen del Proyecto"
+        />
         <CardContent>
-          <Typography variant="h5">{project.nombre}</Typography>
-          <Typography variant="body1">{project.descripcion_larga}</Typography>
-          <Typography variant="body2">Objetivo Financiero: {project.dinero_objetivo}</Typography>
-          <Typography variant="body2">Fecha Límite: {project.fecha_limite}</Typography>
-          <Typography variant="body2">Creador: {project.usuario_id}</Typography>
-          <Typography variant="body2">
-            Estado: {project.activo ? 'Activo' : 'Inactivo'}
+          <Typography variant="h5" gutterBottom>
+            {project.nombre}
+          </Typography>
+          <Typography variant="body1" className={styles.description}>
+            {project.descripcion_larga}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" className={styles.detail}>
+            Objetivo Financiero: ${project.dinero_objetivo}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" className={styles.detail}>
+            Fecha Límite: {project.fecha_limite}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" className={styles.detail}>
+            Creador: {project.usuario_id}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" className={styles.status}>
+            Estado: <strong>{project.activo ? 'Activo' : 'Inactivo'}</strong>
           </Typography>
         </CardContent>
       </Card>
-      <Button
-        variant="contained"
-        color={project.activo ? 'secondary' : 'primary'}
-        onClick={handleToggleActive}
-        className={styles.button}
-      >
-        {project.activo ? 'Marcar como Inactivo' : 'Marcar como Activo'}
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={() => router.push('/pagina-principal')}
-        className={styles.button}
-      >
-        Volver a la Página Principal
-      </Button>
+      <Stack direction="row" spacing={2} className={styles.buttonContainer}>
+        <Button
+          variant="contained"
+          color={project.activo ? 'secondary' : 'primary'}
+          onClick={handleToggleActive}
+        >
+          {project.activo ? 'Marcar como Inactivo' : 'Marcar como Activo'}
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => router.push('/')}
+        >
+          Volver a la Página Principal
+        </Button>
+      </Stack>
     </div>
   );
 }

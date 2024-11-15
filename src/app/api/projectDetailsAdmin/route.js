@@ -37,16 +37,16 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-  const { projectId, currentStatus } = await req.json();
-
-  if (!projectId) {
-    return new Response(
-      JSON.stringify({ message: 'Falta el parámetro projectId' }),
-      { status: 400 }
-    );
-  }
-
   try {
+    const { projectId, currentStatus } = await req.json();
+
+    if (!projectId) {
+      return new Response(
+        JSON.stringify({ message: 'Falta el parámetro projectId' }),
+        { status: 400 }
+      );
+    }
+
     const projectRef = doc(db, 'proyectos', projectId);
     const newStatus = !currentStatus;
 
@@ -60,5 +60,13 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error::contentReference[oaicite:0]{index=0}', error);}
+    console.error('Error al actualizar el estado del proyecto:', error);
+    return new Response(
+      JSON.stringify({
+        message: 'Error al actualizar el estado del proyecto',
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
 }
