@@ -50,13 +50,12 @@ export default function MonitorearProyectos() {
         ))}
       </Grid>
       <div className={styles.buttonContainer}>
-        <Button
-          variant="contained"
-          color="primary"
+        <button
           onClick={handleRegresar}
+          className={styles.button}
         >
           Regresar
-        </Button>
+        </button>
       </div>
     </div>
   );

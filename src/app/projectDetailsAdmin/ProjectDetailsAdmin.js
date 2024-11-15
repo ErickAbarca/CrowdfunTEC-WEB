@@ -83,19 +83,21 @@ export default function ProjectDetailsAdmin() {
         </CardContent>
       </Card>
       <Stack direction="row" spacing={2} className={styles.buttonContainer}>
-        <Button
+        <button
           variant="contained"
           color={project.activo ? 'secondary' : 'primary'}
           onClick={handleToggleActive}
+          className={styles.button}
         >
           {project.activo ? 'Marcar como Inactivo' : 'Marcar como Activo'}
-        </Button>
-        <Button
+        </button>
+        <button
           variant="outlined"
           onClick={() => router.push('/')}
+          className={styles.button}
         >
           Volver a la Página Principal
-        </Button>
+        </button>
       </Stack>
     </div>
   );

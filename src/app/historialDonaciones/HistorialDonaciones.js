@@ -61,14 +61,14 @@ export default function HistorialDonaciones() {
       </Grid2>
 
       {/* Botón de Volver */}
-      <Button
+      <button
         variant="contained"
         color="primary"
         onClick={() => router.push('/')}
         className={styles.button}
       >
         Volver
-      </Button>
+      </button>
     </div>
   );
 }

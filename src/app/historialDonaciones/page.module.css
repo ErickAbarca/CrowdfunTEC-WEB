@@ -1,11 +1,18 @@
-/* Estilos generales de la página */
+/* Estilo de la página con fondo extendido */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* Aplica el fondo a toda la página */
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh; /* Se asegura de que el fondo cubra toda la pantalla */
   padding: 20px;
-  background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
-  font-family: 'Poppins', sans-serif;
+  background: inherit; /* Usa el mismo fondo que el body */
 }
 
 .title {
@@ -20,11 +27,14 @@
   max-width: 1200px;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 0 40px;
 }
 
 .card {
+  width: 100%;
+  max-width: 300px;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -44,10 +54,15 @@
   border-radius: 50%;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
 .button {
-  margin: 25px;
-  padding: 10px 20px;
-  background-color: #4a4e69;
+  padding: 12px 24px;
+  background-color: #7ca8c5;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -57,23 +72,5 @@
 }
 
 .button:hover {
-  background-color: #3b3e5c;
-}
-
-/* Botón de filtro en la parte superior */
-.filterButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4a4e69;
-  color: #ffffff;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.filterButton:hover {
   background-color: #3b3e5c;
 }
