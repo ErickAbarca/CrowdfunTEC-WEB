@@ -73,8 +73,15 @@ export default function EstadisticasSistema() {
           variant="contained"
           color="secondary"
           onClick={() => handleRedireccionar('/createProject')}
-        >
+        >red
           Crear Proyecto
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => handleRedireccionar('/crearEvento')}
+        >
+          Crear Evento
         </Button>
       </div>
       <div className={styles.buttonContainer}>

@@ -43,6 +43,14 @@ export default function MenuUsuario() {
         </Button>
         <Button
           variant="contained"
+          color="primary"
+          className={styles.customButton}
+          onClick={() => handleRedirect('/crearEvento')}
+        >
+          Crear Evento
+        </Button>
+        <Button
+          variant="contained"
           color="error"
           className={styles.customButton}
           onClick={() => handleRedirect('/')}
