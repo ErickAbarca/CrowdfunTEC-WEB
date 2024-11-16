@@ -41,6 +41,10 @@ const ProjectList = () => {
         router.push('../projectDetails/');
     };
 
+    const handleExit = () => {
+        router.push('/');
+      };
+    
     return (
         <div>
             <FilterBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} userName={userName} />
@@ -54,6 +58,11 @@ const ProjectList = () => {
                         <p>Fecha Límite: {project.fecha_limite}</p>
                     </div>
                 ))}
+            </div>
+            <div className={styles.buttonContainer}>
+                <button className={styles.button} onClick={handleExit}>
+                    Salir
+                </button>
             </div>
         </div>
     );
