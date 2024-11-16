@@ -10,7 +10,7 @@ const Page = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Lista de Proyectos</h1>
+      <h1>Lista de Usuarios</h1>
       <UserList searchTerm={searchTerm} /> {/* Pasar searchTerm a ProjectsList */}
     </div>
   );
