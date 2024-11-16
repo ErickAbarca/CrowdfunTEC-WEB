@@ -29,6 +29,7 @@ export default function SignUp() {
 
 
     const handleFondos = () => {router.push('/addMoney');};
+    const handleVolver = () => {router.push('/projectList');};
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -266,6 +267,10 @@ export default function SignUp() {
                 </button>
                 <button className={styles.button} type="button" onClick={handleFondos}>
                     Añadir Fondos
+                </button>
+                
+                <button className={styles.button} type="button" onClick={handleVolver}>
+                    Volver
                 </button>
             </form>
 

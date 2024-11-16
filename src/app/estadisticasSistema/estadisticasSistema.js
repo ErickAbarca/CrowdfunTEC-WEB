@@ -58,6 +58,13 @@ export default function EstadisticasSistema() {
         >
           Gestionar Usuarios
         </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => handleRedireccionar('/menuMentorias')}
+        >
+          Menu Mentorías
+        </Button>
       </div>
       <div className={styles.buttonContainer}>
         <Button onClick={handleRegresar} className={styles.button}>
