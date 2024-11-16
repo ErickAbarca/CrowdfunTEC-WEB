@@ -9,6 +9,10 @@ export default function MenuMentorias() {
   const handleRedireccionar = (ruta) => {
     router.push(ruta);
   };
+  const handleRegresar = () => {
+    router.push('/');
+    //router.back(); // Regresa a la pantalla anterior en el historial
+  };
 
   return (
     <div className={styles.container}>
@@ -33,6 +37,11 @@ export default function MenuMentorias() {
           onClick={() => handleRedireccionar('/pagarMentoria')}
         >
           Pagar Mentoría
+        </Button>
+      </div>
+      <div className={styles.buttonContainer}>
+        <Button onClick={handleRegresar} className={styles.button}>
+          Regresar
         </Button>
       </div>
     </div>
