@@ -26,14 +26,14 @@ export default function CreateProject() {
     const [userId, setUserId] = useState(null);
 
     const handleRegresar = () => {
-      router.push('/estadisticasSistema');
+      router.push('/');
     };
      
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleCancel = () => {
-      router.push('/estadisticasSistema');
+      router.push('/');
     };
 
     const handleMouseDownPassword = (event) => {
