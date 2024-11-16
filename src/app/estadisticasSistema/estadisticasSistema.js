@@ -23,6 +23,10 @@ export default function EstadisticasSistema() {
     router.push(ruta);
   };
 
+  const handleRegresar = () => {
+    router.push('/');
+  };
+
   // Helper para manejar números seguros
   const safeNumber = (value) => (typeof value === 'number' ? value.toFixed(2) : '0.00');
 
@@ -53,6 +57,11 @@ export default function EstadisticasSistema() {
           onClick={() => handleRedireccionar('/gestionarUsuarios')}
         >
           Gestionar Usuarios
+        </Button>
+      </div>
+      <div className={styles.buttonContainer}>
+        <Button onClick={handleRegresar} className={styles.button}>
+          Regresar
         </Button>
       </div>
 
