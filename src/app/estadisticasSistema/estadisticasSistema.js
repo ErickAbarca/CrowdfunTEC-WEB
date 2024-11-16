@@ -114,7 +114,7 @@ export default function EstadisticasSistema() {
           <Grid item xs={12}>
             <Typography variant="h6">Dinero Donado por Proyecto:</Typography>
             {(estadisticas.donacionesPorProyecto || []).map((proyecto) => (
-              <Card className={styles.card} key={proyecto.id} onClick={() => handleProjectClick(proyecto)}>
+              <Card className={styles.card} key={proyecto.id}>
                 <CardContent>
                   <Typography variant="body1">
                     <strong>{proyecto.nombre}</strong>

@@ -93,6 +93,13 @@ export default function ProjectDetailsAdmin() {
         </button>
         <button
           variant="outlined"
+          onClick={() => router.push('/updateProject')}
+          className={styles.button}
+        >
+          Editar
+        </button>
+        <button
+          variant="outlined"
           onClick={() => router.push('/monitorearProyectos')}
           className={styles.button}
         >

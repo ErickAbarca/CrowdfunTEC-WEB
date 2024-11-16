@@ -42,7 +42,7 @@ export default function EditUser() {
     };
 
     const handleCancel = () => {
-      router.push('/estadisticasSistema');
+      router.push('/projectDetailsAdmin');
     };
 
     const handleMouseUpPassword = (event) => {
