@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 
 const PagarMentorias = () => {
   const [mentorias, setMentoria] = useState([]);
   const [mensaje, setMensaje] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const usuario_id = window.localStorage.getItem('userId');
@@ -44,8 +46,18 @@ const PagarMentorias = () => {
   };
 
   const handleExit = () => {
-    router.push('/'); // Redirige a la página principal o a la ruta deseada
-  };
+    const userRole = window.localStorage.getItem('userRole');
+  
+    if (userRole === 'admin') {
+      router.push('/estadisticasSistema');
+    } else if (userRole === 'user') {
+      router.push('/projectList');
+    } else if (userRole === 'creador') {
+      router.push('/projectList');
+    } else {
+      router.push('/'); // Redirige a la página principal en caso de rol desconocido
+    }
+  };  
 
   return (
     <div className={styles.container}>
