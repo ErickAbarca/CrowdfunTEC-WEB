@@ -15,8 +15,12 @@ export default function MonitorearProyectos() {
       .catch((error) => console.error('Error al obtener los proyectos:', error));
   }, []);
 
+  //const handleVerDetalles = (id) => {
+  //  router.push(`/ProjectDetailsAdmin?id=${id}`);
+  //};
+
   const handleRegresar = () => {
-    router.push('/');
+    router.push('/estadisticasSistema');
   };
 
   return (
@@ -27,7 +31,10 @@ export default function MonitorearProyectos() {
       <Grid container spacing={3}>
         {proyectos.map((proyecto) => (
           <Grid item xs={12} sm={6} md={4} key={proyecto.id}>
-            <Card className={styles.card}>
+            <Card 
+            className={styles.card}
+            //onClick={() => handleVerDetalles(proyecto.id)} // Redirección al hacer clic
+            >
               { /*{proyecto.imagenUrl && (
                 <CardMedia
                   component="img"

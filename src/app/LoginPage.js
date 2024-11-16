@@ -46,6 +46,9 @@ export default function Login() {
                     if (data.rol === 'User' || data.rol === 'user') {
                         router.push('/projectList');
                     } else if (data.rol === 'Admin' || data.rol === 'admin') {
+                        //router.push('/monitorearDonaciones');
+                        //router.push('/gestionarUsuarios');
+                        router.push('/estadisticasSistema');
                         // Llamar al endpoint para obtener el proyecto del admin
                         fetch('/api/getProjectData', {
                             method: 'POST',
