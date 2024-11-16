@@ -18,13 +18,16 @@ function validarCorreo(correo) {
     return regex.test(correo);
 }
 
+
 export default function CreateProject() {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
     const [userId, setUserId] = useState(null);
 
-
+    const handleRegresar = () => {
+      router.push('/estadisticasSistema');
+    };
      
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -61,7 +64,7 @@ export default function CreateProject() {
         }).then(response => {
             if (response.ok) {
                 alert('Proyecto creado exitosamente');
-                router.push('/pagina-principal');
+                handleRegresar();
             } else {
                 alert('Error al crear el usuario');
                 response.json().then(data => console.error(data));

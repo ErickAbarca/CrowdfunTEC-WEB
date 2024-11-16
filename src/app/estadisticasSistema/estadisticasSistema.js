@@ -33,6 +33,10 @@ export default function EstadisticasSistema() {
   if (!estadisticas) {
     return <Typography>Cargando estadísticas...</Typography>;
   }
+  const handleProjectClick = (project) => {
+    window.localStorage.setItem('projectId', project.id);
+    router.push('/updateProject');
+};
 
   return (
     <div className={styles.container}>
@@ -64,6 +68,13 @@ export default function EstadisticasSistema() {
           onClick={() => handleRedireccionar('/menuMentorias')}
         >
           Menu Mentorías
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => handleRedireccionar('/createProject')}
+        >
+          Crear Proyecto
         </Button>
       </div>
       <div className={styles.buttonContainer}>
@@ -103,7 +114,7 @@ export default function EstadisticasSistema() {
           <Grid item xs={12}>
             <Typography variant="h6">Dinero Donado por Proyecto:</Typography>
             {(estadisticas.donacionesPorProyecto || []).map((proyecto) => (
-              <Card className={styles.card} key={proyecto.id}>
+              <Card className={styles.card} key={proyecto.id} onClick={() => handleProjectClick(proyecto)}>
                 <CardContent>
                   <Typography variant="body1">
                     <strong>{proyecto.nombre}</strong>
