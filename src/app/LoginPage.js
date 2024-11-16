@@ -67,6 +67,7 @@ export default function Login() {
                                 //router.push(`/monitorearProyectos`);
                                 // router.push(`/historialProyectos`);
                                 // router.push(`/subirMedia`);
+                                // router.push(`/userList`);
 
                             } else {
                                 alert('No se encontró el proyecto asociado al administrador.');

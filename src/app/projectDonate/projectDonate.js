@@ -112,7 +112,7 @@ export default function EditUser() {
 
     useEffect(() => {
       if (projectId) {
-          fetch('/api/getProjectData', {
+          fetch('/api/getData', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
