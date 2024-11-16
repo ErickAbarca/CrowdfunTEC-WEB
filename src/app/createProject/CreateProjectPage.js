@@ -32,7 +32,9 @@ export default function CreateProject() {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleCancel = () => {};
+    const handleCancel = () => {
+      router.push('/estadisticasSistema');
+    };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
