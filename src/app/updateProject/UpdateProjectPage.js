@@ -23,7 +23,7 @@ export default function EditUser() {
     const [showPassword, setShowPassword] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
     const [userId, setUserId] = useState(null);
-    const [projectId, setProjectId] = useState("ZodnWe66suqQszOwCwNf");
+    const [projectId, setProjectId] = useState('');
     const [projectName, setProjectName] = useState('');
     const [shortDescription, setShortDescription] = useState('');
     const [longDescription, setLongDescription] = useState('');
@@ -41,7 +41,9 @@ export default function EditUser() {
         event.preventDefault();
     };
 
-    const handleCancel = () => {};
+    const handleCancel = () => {
+      router.push('/estadisticasSistema');
+    };
 
     const handleMouseUpPassword = (event) => {
         event.preventDefault();
@@ -83,7 +85,7 @@ export default function EditUser() {
         }).then(response => {
             if (response.ok) {
                 alert('Proyecto actualizado');
-                router.push('/pagina-principal');
+                router.push('/estadisticasSistema');
             } else {
                 alert('Error al actualizar el proyecto');
                 response.json().then(data=>console.log(data));
@@ -113,7 +115,7 @@ export default function EditUser() {
     useEffect(() => {
       console.log(projectId);
       if (projectId) {
-          fetch('/api/getProjectData', {
+          fetch('/api/getData', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
