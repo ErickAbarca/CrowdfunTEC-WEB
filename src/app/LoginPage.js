@@ -56,7 +56,7 @@ export default function Login() {
                         })
                         .then((res) => res.json())
                         .then((projectData) => {
-                            console.log('Respuesta del endpoint getProjectData:', projectData); // Verifica la estructura
+                            //console.log('Respuesta del endpoint getProjectData:', projectData); // Verifica la estructura
     
                             // Asegúrate de que projectData.project y projectData.project.id existen
                             const projectId = projectData?.project?.id;
@@ -64,10 +64,12 @@ export default function Login() {
                                 window.localStorage.setItem('projectId', projectId);
                                 
                                 // router.push(`/projectDetailsAdmin?projectId=${projectId}`);
-                                //router.push(`/monitorearProyectos`);
+                                // router.push(`/monitorearProyectos`);
                                 // router.push(`/historialProyectos`);
                                 // router.push(`/subirMedia`);
                                 // router.push(`/userList`);
+                                // router.push(`/solicitarMentoria`);
+                                // router.push(`/pagarMentoria`);
 
                             } else {
                                 alert('No se encontró el proyecto asociado al administrador.');

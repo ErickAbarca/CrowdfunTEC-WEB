@@ -17,6 +17,7 @@ export async function POST(req) {
         if (workArea) updateFields.area_trabajo = workArea;
         if (monto_mentoria) updateFields.monto_mentoria = monto_mentoria;
         if (id) updateFields.cedula = id;
+        // if (transacciones) updateFields.transacciones = transacciones;
 
         console.log("Campos a actualizar:", updateFields);
 

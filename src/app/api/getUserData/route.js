@@ -7,8 +7,6 @@ export async function POST(req) {
         // Obtener email y password del body de la solicitud
         const { id } = await req.json();
 
-        
-
         // Referencia a la colección 'usuarios'
         const usuariosRef = doc(db, 'usuarios', id);
 
