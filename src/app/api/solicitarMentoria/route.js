@@ -1,12 +1,12 @@
 import db from '../db'; // Importar Firestore
-import { collection, addDoc, doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc, serverTimestamp } from 'firebase/firestore';
 
 export async function POST(req) {
   try {
-    const { usuario_id, mentor_id, tipo, descripcion, monto } = await req.json();
+    const { usuario_id, mentor_id, tipo, descripcion } = await req.json();
 
     // Validar datos requeridos
-    if (!usuario_id || !mentor_id || tipo === undefined || !descripcion || !monto) {
+    if (!usuario_id || !mentor_id || tipo === undefined || !descripcion) {
       return new Response(
         JSON.stringify({ message: 'Faltan campos requeridos' }),
         { status: 400 }
@@ -24,16 +24,6 @@ export async function POST(req) {
       );
     }
 
-    const usuario = usuarioSnap.data();
-
-    // Verificar saldo suficiente
-    if (usuario.dinero_disponible < monto) {
-      return new Response(
-        JSON.stringify({ message: 'Saldo insuficiente' }),
-        { status: 400 }
-      );
-    }
-
     // Verificar mentor
     const mentorRef = doc(db, 'usuarios', mentor_id);
     const mentorSnap = await getDoc(mentorRef);
@@ -45,23 +35,30 @@ export async function POST(req) {
       );
     }
 
+    const mentor = mentorSnap.data();
+
+    // Validar que el mentor tenga definido un monto de mentoría
+    const monto = mentor.monto_mentoria;
+    if (!monto || typeof monto !== 'number') {
+      return new Response(
+        JSON.stringify({ message: 'El mentor no tiene definido un monto de mentoría válido' }),
+        { status: 400 }
+      );
+    }
+
+
     // Crear registro de mentoría
     const nuevaMentoria = {
       usuario_id,            // ID del admin que solicita
       mentor_id,             // ID del mentor asignado
       tipo,                  // booleano: true = presencial, false = virtual
       descripcion,           // Descripción de la mentoría
-      monto,                 // Monto pagado
+      monto,                 // Monto del mentor
       fecha: serverTimestamp(), // Timestamp de Firebase
       estado: 'pendiente',      // Estado inicial de la mentoría
     };
 
     await addDoc(collection(db, 'mentorias'), nuevaMentoria);
-
-    // Actualizar saldo del usuario (restar el monto)
-    await updateDoc(usuarioRef, {
-      dinero_disponible: usuario.dinero_disponible - monto,
-    });
 
     return new Response(
       JSON.stringify({ message: 'Mentoría registrada exitosamente' }),

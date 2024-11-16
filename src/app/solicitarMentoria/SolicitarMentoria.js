@@ -2,17 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './page.module.css';
-import { useRouter } from 'next/navigation'; // Importa useRouter
-import { Timestamp } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
 
 const SolicitarMentorias = () => {
   const [mentores, setMentores] = useState([]);
   const [mentorId, setMentorId] = useState('');
   const [tipo, setTipo] = useState(true); // true = presencial, false = virtual
   const [descripcion, setDescripcion] = useState('');
-  const [monto, setMonto] = useState('');
   const [mensaje, setMensaje] = useState('');
-  const router = useRouter(); // Inicializa router
+  const router = useRouter();
 
   useEffect(() => {
     // Obtener la lista de mentores
@@ -20,10 +18,17 @@ const SolicitarMentorias = () => {
       .then((response) => response.json())
       .then((data) => {
         setMentores(data);
-        if (data.length > 0) setMentorId(data[0].id); // Seleccionar el primer mentor por defecto
+        if (data.length > 0) {
+          setMentorId(data[0].id); // Seleccionar el primer mentor por defecto
+        }
       })
       .catch((error) => console.error('Error al obtener los mentores:', error));
   }, []);
+
+  const handleMentorChange = (event) => {
+    const selectedMentorId = event.target.value;
+    setMentorId(selectedMentorId);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +49,6 @@ const SolicitarMentorias = () => {
           mentor_id: mentorId,
           tipo,
           descripcion,
-          monto: parseFloat(monto)
         }),
       });
 
@@ -73,16 +77,18 @@ const SolicitarMentorias = () => {
         <select
           className={styles.select}
           value={mentorId}
-          onChange={(e) => setMentorId(e.target.value)}
+          onChange={handleMentorChange}
           required
         >
           {mentores.map((mentor) => (
             <option key={mentor.id} value={mentor.id}>
-              {mentor.nombre}
+              {mentor.nombre} - $
+              {typeof mentor.monto_mentoria === 'number'
+                ? mentor.monto_mentoria.toFixed(2)
+                : 'N/A'}
             </option>
           ))}
         </select>
-
         <label className={styles.label}>Descripción</label>
         <textarea
           className={styles.textarea}
@@ -90,16 +96,6 @@ const SolicitarMentorias = () => {
           onChange={(e) => setDescripcion(e.target.value)}
           required
         ></textarea>
-
-        <label className={styles.label}>Monto ($)</label>
-        <input
-          type="number"
-          className={styles.input}
-          value={monto}
-          onChange={(e) => setMonto(e.target.value)}
-          min="0"
-          required
-        />
 
         <label className={styles.label}>Tipo</label>
         <select

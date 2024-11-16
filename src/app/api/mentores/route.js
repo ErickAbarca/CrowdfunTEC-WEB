@@ -1,20 +1,26 @@
-import db from '../db';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import db from '../db'; // Importar Firestore
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export async function GET() {
   try {
+    // Crear la consulta para usuarios con rol "mentor"
     const usuariosRef = collection(db, 'usuarios');
-    const mentoresQuery = query(usuariosRef, where('rol', '==', 'mentor'));
-    const snapshot = await getDocs(mentoresQuery);
+    const q = query(usuariosRef, where('rol', '==', 'mentor'));
 
-    const mentores = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      nombre: doc.data().nombre,
-    }));
+    const querySnapshot = await getDocs(q);
+
+    const mentores = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        nombre: data.nombre || 'Sin nombre',
+        monto_mentoria: data.monto_mentoria || 0, // Asegúrate de leer este valor
+      };
+    });
 
     return new Response(JSON.stringify(mentores), { status: 200 });
   } catch (error) {
-    console.error('Error al obtener la lista de mentores:', error);
+    console.error('Error al obtener los mentores:', error);
     return new Response(
       JSON.stringify({ message: 'Error al obtener los mentores', error: error.message }),
       { status: 500 }
