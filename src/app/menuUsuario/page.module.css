@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: #4a4e69;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .customButton {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+  

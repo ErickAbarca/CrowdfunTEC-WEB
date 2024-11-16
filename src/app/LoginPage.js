@@ -44,7 +44,8 @@ export default function Login() {
                     }
     
                     if (data.rol === 'User' || data.rol === 'user') {
-                        router.push('/projectList');
+                        //router.push('/projectList');
+                        router.push('/menuUsuario');
                     } else if (data.rol === 'Admin' || data.rol === 'admin') {
                         //router.push('/monitorearDonaciones');
                         //router.push('/gestionarUsuarios');
@@ -80,7 +81,8 @@ export default function Login() {
                         })
                         .catch((error) => console.error('Error al obtener el ID del proyecto:', error));
                     } else if ( data.rol === 'Mentor' || data.rol === 'mentor' ) {
-                        router.push('/projectList');
+                        //router.push('/projectList');
+                        router.push('/menuUsuario');
                     } else {
                         alert('Usuario o contraseña incorrecta');
                     }
