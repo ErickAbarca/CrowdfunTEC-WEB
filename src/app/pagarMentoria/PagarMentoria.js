@@ -52,8 +52,6 @@ const PagarMentorias = () => {
       router.push('/estadisticasSistema');
     } else if (userRole === 'user') {
       router.push('/projectList');
-    } else if (userRole === 'creador') {
-      router.push('/projectList');
     } else {
       router.push('/'); // Redirige a la página principal en caso de rol desconocido
     }
