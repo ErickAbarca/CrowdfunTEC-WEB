@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  height: 100vh;
+  height: 100%;
   background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
   font-family: 'Poppins', sans-serif;
 }

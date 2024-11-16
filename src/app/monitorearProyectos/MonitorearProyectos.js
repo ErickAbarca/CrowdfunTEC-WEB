@@ -15,9 +15,9 @@ export default function MonitorearProyectos() {
       .catch((error) => console.error('Error al obtener los proyectos:', error));
   }, []);
 
-  //const handleVerDetalles = (id) => {
-  //  router.push(`/ProjectDetailsAdmin?id=${id}`);
-  //};
+  const handleVerDetalles = (id) => {
+    router.push(`/projectDetailsAdmin?projectId=${id}`);
+  };
 
   const handleRegresar = () => {
     router.push('/estadisticasSistema');
@@ -31,9 +31,10 @@ export default function MonitorearProyectos() {
       <Grid container spacing={3}>
         {proyectos.map((proyecto) => (
           <Grid item xs={12} sm={6} md={4} key={proyecto.id}>
-            <Card 
-            className={styles.card}
-            //onClick={() => handleVerDetalles(proyecto.id)} // Redirección al hacer clic
+            <Card
+              className={styles.card}
+              onClick={() => handleVerDetalles(proyecto.id)} // Redirección al hacer clic en la tarjeta
+              style={{ cursor: 'pointer' }} // Cambiar el cursor para indicar que la tarjeta es clickeable
             >
               { /*{proyecto.imagenUrl && (
                 <CardMedia
@@ -51,6 +52,17 @@ export default function MonitorearProyectos() {
                   Monto Recaudado: $
                   {Number(proyecto.montoRecaudado || 0).toFixed(2)}
                 </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Evitar que el clic en el botón active el evento del card
+                    handleVerDetalles(proyecto.id);
+                  }}
+                  className={styles.button}
+                >
+                  Ver Detalles
+                </Button>
               </CardContent>
             </Card>
           </Grid>
